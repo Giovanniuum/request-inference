@@ -13,8 +13,8 @@ type FiniteWordAutomata struct {
 
 // NewFiniteWordAutomata initializes a new FiniteWordAutomata, which is globally nothing
 // more than a `FiniteAutomata`.
-func NewFiniteWordAutomata() *FiniteWordAutomata {
-	return &FiniteWordAutomata{FiniteAutomata: NewFiniteAutomata()}
+func NewFiniteWordAutomata(q0 *models.State) *FiniteWordAutomata {
+	return &FiniteWordAutomata{FiniteAutomata: NewFiniteAutomata(q0)}
 }
 
 // AddRule adds a new rule to the automata. Rule's symbol must be a character to be valid for
@@ -40,4 +40,10 @@ func (fwa *FiniteWordAutomata) AddRule(r *models.Rule) bool {
 		fwa.Q[r.Destination] = true
 	}
 	return true
+}
+
+// Reset makes the given automata a brand new-like created `FiniteWordAutomata`
+// by resetting its embedded `FiniteAutomata`field.
+func (fwa *FiniteWordAutomata) Reset(q0 *models.State) {
+	fwa.FiniteAutomata = NewFiniteAutomata(q0)
 }
