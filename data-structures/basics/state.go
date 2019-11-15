@@ -1,4 +1,6 @@
-package models
+package basics
+
+import "fmt"
 
 var nextStateID int64 // package incrementation
 
@@ -15,8 +17,13 @@ type State struct {
 
 // NewState creates a new `State`, by setting its father and incrementing the ID.
 func NewState(father *State) *State {
+	s := &State{ID: nextStateID, Ancestor: father}
 	nextStateID++
-	return &State{ID: nextStateID, Ancestor: father}
+	return s
+}
+
+func (s *State) String() string {
+	return fmt.Sprintf("State: <id: %d> <ancestor: %v>\n", s.ID, s.Ancestor)
 }
 
 // ResetStates resets the current ID for the next created `State`.

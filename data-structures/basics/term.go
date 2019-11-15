@@ -1,4 +1,4 @@
-package models
+package basics
 
 // Term is our custom way to implement a simple tree structure.
 // It's just composed of a root, which is a `Symbol` instance,

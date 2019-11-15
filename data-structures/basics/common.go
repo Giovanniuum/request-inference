@@ -1,4 +1,6 @@
-package models
+package basics
+
+import "fmt"
 
 // Rule is the representation of a transition rule the automata uses to
 // go from one state to another. It's a generic type composing of three fields:
@@ -12,8 +14,16 @@ type Rule struct {
 	Symbol      Symbol
 }
 
+func (r *Rule) String() string {
+	return fmt.Sprintf("Rule: {<source: %v> <symbol: %v> <destination: %v>}\n", r.Source, r.Symbol, r.Destination)
+}
+
 // Symbol is a model composed of an `Object`, which can be any type as long as the automata
 // manages it. It's what the automata reads to go from one state to another.
 type Symbol struct {
 	Object interface{}
+}
+
+func (s Symbol) String() string {
+	return fmt.Sprintf("Symbol: <%v>\n", s.Object)
 }
